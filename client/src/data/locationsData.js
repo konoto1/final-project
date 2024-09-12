@@ -2,6 +2,7 @@ import img1 from '../assets/locations/1.jpg';
 import img2 from '../assets/locations/2.jpg';
 import img3 from '../assets/locations/3.jpg';
 
+
 export const locationsData = [
     {
         img: img1,
