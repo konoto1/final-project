@@ -8,7 +8,13 @@ locationsApiRouter.get('/', getLocations);
 async function getLocations(req, res) {
 
     const sql = 'SELECT * FROM locations INNER JOIN adress ON locations.adress_id = adress.adress_id;';
-    const dataFromServer = await connection.execute(sql);
+    let dataFromServer = [[]];
+
+    try {
+        dataFromServer = await connection.execute(sql);
+    } catch (error) {
+
+    }
 
     return res.json({
         state: 'success',
