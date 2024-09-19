@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Footer } from "../components/footer/Footer";
 import { Header } from "../components/header/Header";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../context/GlobalContext";
 
 export function Login() {
+  const {changeLoginStatus} = useContext(GlobalContext);
   const minUsernameLength = 3;
   const maxUsernameLength = 20;
   const minPasswordLength = 12;
@@ -59,7 +61,7 @@ export function Login() {
             .then(data => {
               setApiResponse(data);
               if (data.status === 'success') {
-                // changeLoginStatus(true);
+                changeLoginStatus(true);
                 
                 navigate('/dashboard');
               }

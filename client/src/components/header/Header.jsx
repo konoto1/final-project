@@ -1,10 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/react.svg';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
 export function Header () {
-  const { isLogedIn } = useContext(GlobalContext);
+  const { isLogedIn, changeLoginStatus } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
+  function logout () {
+    changeLoginStatus(false);
+    navigate('/');
+  }
 
     return (
   <div className="container">
@@ -31,7 +37,11 @@ export function Header () {
         <Link to='/login' className="btn btn-outline-primary me-2">Prisijungti</Link>
         <Link to='/register' className="btn btn-primary">Registracija</Link>
       </div>}
-       {isLogedIn && <Link to='/dashboard' className="nav-link px-2 link-secondary">Dashboard</Link>}
+      {isLogedIn && <div className="col-md-3 text-end">
+        <Link to='/dashboard' className="nav-link px-2 link-secondary">Dashboard</Link>
+        <button onClick={logout} type="button" className="btn btn-outline-primary me-2">Log out</button>
+      </div>}
+      
     </header>
   </div>
     );
