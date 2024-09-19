@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/react.svg';
+import { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 
 export function Header () {
+  const { isLogedIn } = useContext(GlobalContext);
+
     return (
   <div className="container">
     <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -23,10 +27,11 @@ export function Header () {
         </li>
       </ul>
 
-      <div className="col-md-3 text-end">
+      {!isLogedIn && <div className="col-md-3 text-end">
         <Link to='/login' className="btn btn-outline-primary me-2">Prisijungti</Link>
         <Link to='/register' className="btn btn-primary">Registracija</Link>
-      </div>
+      </div>}
+       {isLogedIn && <Link to='/dashboard' className="nav-link px-2 link-secondary">Dashboard</Link>}
     </header>
   </div>
     );

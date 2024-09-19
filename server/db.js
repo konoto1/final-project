@@ -26,7 +26,7 @@ setInterval(async () => {
             console.log('Neapvyko prisijungti prie DB programos gal pamirsai isijungti XAMMP?');
         }
     } else {
-        console.log('connection: OK');
+        // console.log('connection: OK');
     }
 
 }, 10000);
