@@ -2,9 +2,11 @@ import { connection } from '../../db.js';
 import express from "express";
 import { isValidPassword, isValidUsername } from '../../lib/isValid.js';
 
+const tokenLength = 20;
 export const loginApiRouter = express.Router();
 
 loginApiRouter.post('/', postLogin);
+loginApiRouter.get('/', getLogin);
 
 loginApiRouter.use((req, res) => {
     return res.json({
@@ -12,6 +14,22 @@ loginApiRouter.use((req, res) => {
         data: "Toks HTML metodas nenaudojamas",
     });
 });
+
+async function getLogin(req, res) {
+    const cookies = req
+        .headers
+        .cookie
+        .split(';')
+        .map(s => s.trim().split('='))
+        .reduce((total, item) => ({ ...total, [item[0]]: item[1] }), {});
+    console.log(cookies);
+    console.log(cookies.loginToken);
+
+
+    return res.json({
+        isLogedIn: true,
+    });
+}
 
 async function postLogin(req, res) {
 
@@ -77,7 +95,7 @@ async function postLogin(req, res) {
     const abc = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789';
     let token = '';
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < tokenLength; i++) {
         token += abc[Math.floor(Math.random() * abc.length)];
     }
 
