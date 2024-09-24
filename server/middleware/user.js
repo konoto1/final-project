@@ -1,6 +1,8 @@
 import { connection } from "../db.js";
 import { env } from "../env.js";
 
+const tokenLength = 20;
+
 export async function userDetails(req, res, next) {
     req.user = {
         isLogedIn: false,
@@ -18,7 +20,7 @@ export async function userDetails(req, res, next) {
                 tokens.created_at as tokens_created_at, 
                 users.created_at as user_created_at
             FROM tokens 
-            INNER JOIN users ON tokens.user_id = user.id
+            INNER JOIN users ON tokens.user_id = users.id
             WHERE tokens.token = ? AND tokens.created_at >= ?;`;
             const deadline = new Date(Date.now() - env.COOKIE_MAX_AGE * 1000);
             const [selectResult] = await connection.execute(sql, [cookies.loginToken, deadline]);

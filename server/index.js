@@ -15,7 +15,6 @@ const helmetOptions = {
     crossOriginResourcePolicy: false,
 }
 
-
 const app = express();
 
 app.use(express.json({
