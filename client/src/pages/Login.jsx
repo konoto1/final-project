@@ -4,16 +4,22 @@ import { Header } from "../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
+
+
 export function Login() {
   const {changeLoginStatus} = useContext(GlobalContext);
+  const {VITE_MODE, VITE_USERNAME, VITE_PASSWORD} = import.meta.env;
+  const initialUsername = VITE_MODE === 'dev' ? VITE_USERNAME : '';
+  const initialPassword = VITE_MODE === 'dev' ? VITE_PASSWORD : '';
+
   const minUsernameLength = 3;
   const maxUsernameLength = 20;
   const minPasswordLength = 12;
   const maxPasswordLength = 100;
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(initialUsername);
   const [usernameError, setUsernameError] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(initialPassword);
   const [passwordError, setPasswordError] = useState('');
   const [isFormValidated, setIsFormValidated] = useState(false);
   const [apiResponse, setApiResponse] = useState(null);

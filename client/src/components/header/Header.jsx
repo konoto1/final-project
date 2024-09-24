@@ -8,8 +8,15 @@ export function Header () {
   const navigate = useNavigate();
 
   function logout () {
-    changeLoginStatus(false);
-    navigate('/');
+
+    fetch('http://localhost:5020/api/logout',{
+      credentials: 'include',
+    })
+      .then(() => {
+        changeLoginStatus(false);
+        navigate('/');
+      })
+      .catch(err => console.error(err));
   }
 
     return (

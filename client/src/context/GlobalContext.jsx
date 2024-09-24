@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const initialContext = {
     isLogedIn: false,
+    role: 'public',
     changeLoginStatus: () => {},
 };
 
@@ -10,7 +11,7 @@ export const GlobalContext = createContext(initialContext);
 
 export function GlobalContextWrapper(props) {
     const [isLogedIn, setIsLogedIn] = useState(initialContext.isLogedIn);
-
+    const [role, setRole] = useState(initialContext.role)
     useEffect(() => {
         fetch('http://localhost:5020/api/login',{
             method: 'GET',
@@ -26,7 +27,7 @@ export function GlobalContextWrapper(props) {
     }
 
     return (
-        <GlobalContext.Provider value={{ isLogedIn, changeLoginStatus }}>
+        <GlobalContext.Provider value={{ isLogedIn, changeLoginStatus, role }}>
             {props.children}
         </GlobalContext.Provider>
     );

@@ -28,7 +28,7 @@ export async function userDetails(req, res, next) {
             if (selectResult.length === 1) {
                 req.user.isLogedIn = true;
                 req.user.role = 'user';
-                req.user.username = selectResult.username;
+                req.user.username = selectResult[0].username;
             };
 
         } catch (error) {
