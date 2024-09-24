@@ -6,6 +6,7 @@ import { Login } from './pages/Login.jsx';
 import { Register } from './pages/Register.jsx';
 import { Dashboards } from './pages/Dashboard.jsx';
 import { GlobalContextWrapper } from './context/GlobalContext';
+import { NewLocation } from './pages/NewLocation.jsx'
 
 
 
@@ -19,6 +20,7 @@ export function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/locations' element={<LocationListing />}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route path='/locations/new' element={<NewLocation />}></Route>
           <Route path='/register' element={<Register />}></Route>
 
           <Route path='/dashboard' element={<Dashboards />}></Route>

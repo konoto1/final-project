@@ -7,7 +7,7 @@ import { GlobalContext } from "../context/GlobalContext";
 
 
 export function Login() {
-  const {changeLoginStatus} = useContext(GlobalContext);
+  const {changeLoginStatus, changeRole, changeUsername} = useContext(GlobalContext);
   const {VITE_MODE, VITE_USERNAME, VITE_PASSWORD} = import.meta.env;
   const initialUsername = VITE_MODE === 'dev' ? VITE_USERNAME : '';
   const initialPassword = VITE_MODE === 'dev' ? VITE_PASSWORD : '';
@@ -67,8 +67,9 @@ export function Login() {
             .then(data => {
               setApiResponse(data);
               if (data.status === 'success') {
-                changeLoginStatus(true);
-                
+                changeLoginStatus(data.isLogedIn);
+                changeRole(data.role);
+                changeUsername(data.username);
                 navigate('/dashboard');
               }
             })
@@ -92,6 +93,7 @@ export function Login() {
                     <label htmlFor="username">Slapyvardis</label>
                     {usernameError && <p className="invalid-feedback">{usernameError}</p>}
                   </div>
+
                   <div className="form-floating">
                     <input value={password} onChange={e => setPassword(e.target.value)} type="password" id="password" placeholder="Password"
                     className={'form-control ' + (isFormValidated ? passwordError ? 'is-invalid' : 'is-valid' : '')} />

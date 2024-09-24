@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
 export function Header () {
-  const { isLogedIn, changeLoginStatus } = useContext(GlobalContext);
+  const { isLogedIn, changeLoginStatus, username, role } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   function logout () {
@@ -45,6 +45,7 @@ export function Header () {
         <Link to='/register' className="btn btn-primary">Registracija</Link>
       </div>}
       {isLogedIn && <div className="col-md-3 text-end">
+        <p>{username}({role})</p>
         <Link to='/dashboard' className="nav-link px-2 link-secondary">Dashboard</Link>
         <button onClick={logout} type="button" className="btn btn-outline-primary me-2">Log out</button>
       </div>}
